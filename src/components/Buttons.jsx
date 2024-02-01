@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
 import { ResponseContext } from '../context';
+import { useNavigate } from 'react-router-dom';
 
 const Buttons = ({dataIndex, updateIndex}) => {
 
     const {result,setResult} = useContext(ResponseContext)
+    const navigate = useNavigate()
 
     const handleBack = ()=>{
         if(dataIndex>0){
@@ -13,8 +15,7 @@ const Buttons = ({dataIndex, updateIndex}) => {
     const handleNext = (e)=>{
         e.preventDefault();
         const valid = checkFields(result[dataIndex]);
-        console.log(!valid);
-        if(!valid){
+        if(valid){
             if(dataIndex<2){
                 updateIndex((prev)=>prev+1);
             }
@@ -26,15 +27,18 @@ const Buttons = ({dataIndex, updateIndex}) => {
         e.preventDefault();
         console.log(result);
         const valid = checkFields(result[dataIndex]);
-        if(!valid){
+        if(valid){
             alert("Response submitted succesfully")
+            navigate('/result')
+        }else{
+            alert("Some fields are empty")
         }
     }
     const checkFields = (obj) =>{
         console.log(obj);
         for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
-              if (obj[key]) {
+              if (!obj[key]) {
                 return false; // If any variable is not empty, return false
               }
             }
