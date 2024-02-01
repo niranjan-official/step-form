@@ -12,19 +12,34 @@ const Buttons = ({dataIndex, updateIndex}) => {
     }
     const handleNext = (e)=>{
         e.preventDefault();
-        const form = e.target;
-        console.log(form.checkValidity());
-        if(!form.checkValidity()){
-            alert("Fields cannot be empty")
-        }
-        if(dataIndex<2){
-            updateIndex((prev)=>prev+1);
+        const valid = checkFields(result[dataIndex]);
+        console.log(!valid);
+        if(!valid){
+            if(dataIndex<2){
+                updateIndex((prev)=>prev+1);
+            }
+        }else{
+            alert("some fields are empty")
         }
     }
     const handleSubmit = (e)=>{
         e.preventDefault();
         console.log(result);
-        alert("Response submitted succesfully")
+        const valid = checkFields(result[dataIndex]);
+        if(!valid){
+            alert("Response submitted succesfully")
+        }
+    }
+    const checkFields = (obj) =>{
+        console.log(obj);
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+              if (obj[key]) {
+                return false; // If any variable is not empty, return false
+              }
+            }
+          }
+          return true;
     }
   return (
     <div className='w-full flex justify-between px-4'>

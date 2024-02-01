@@ -24,19 +24,19 @@ export const data = [
       },
       {
         label: "Passing out year",
-        inputType: "number",
+        inputType: "text",
         placeHolder: "Enter the year"
       },
       {
         label: "CGPA obtained",
-        inputType: "number",
+        inputType: "textt",
         placeHolder: "Enter your cgpa or percentage"
       }
     ],
     [
       {
         label: "Age",
-        inputType: "number",
+        inputType: "text",
         placeHolder: "Enter your age"
       },
       {
